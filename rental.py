@@ -1,5 +1,5 @@
 # rental.py
-# Membre 5 - Branche: feature/rental-integration-readme
+# Member 5 - Branch: feature/rental-integration-readme
 
 from customer import Customer
 from vehicle import Vehicle
@@ -7,20 +7,20 @@ from vehicle import Vehicle
 
 class Rental:
     """
-    Classe Rental : relie un Customer à un Vehicle pour une durée donnée.
-    Gère le calcul du coût total avec remise membre (10%).
+    Rental class: links a Customer to a Vehicle for a given duration.
+    Handles total cost calculation with member discount.
     """
 
-    MEMBER_DISCOUNT_RATE = 0.10  # 10% de remise pour les membres
+    MEMBER_DISCOUNT_RATE = 0.10  # 10% discount for members
 
     def __init__(self, customer: Customer, vehicle: Vehicle, duration_days: int):
         """
-        Initialise une location.
+        Initializes a rental.
 
         Args:
-            customer (Customer): Le client qui loue le véhicule.
-            vehicle (Vehicle): Le véhicule loué (Vehicle, Car ou LuxuryCar).
-            duration_days (int): La durée de la location en jours.
+            customer (Customer): The customer renting the vehicle.
+            vehicle (Vehicle): The rented vehicle.
+            duration_days (int): The rental duration in days.
         """
         self.customer = customer
         self.vehicle = vehicle
@@ -28,16 +28,16 @@ class Rental:
 
     def total_cost(self) -> float:
         """
-        Calcule le coût total de la location.
-        Utilise calculate_cost(days) de Vehicle, puis applique la remise membre.
+        Calculates the total rental cost.
+        Applies a 10% discount if the customer is a member.
 
-        3ème expression arithmétique :
-            coût_base = vehicle.calculate_cost(duration_days)
-            remise    = coût_base * MEMBER_DISCOUNT_RATE  (si is_member)
-            total     = coût_base - remise
+        3rd arithmetic expression:
+            base_cost = vehicle.calculate_cost(duration_days)
+            discount  = base_cost * MEMBER_DISCOUNT_RATE  (if is_member)
+            total     = base_cost - discount
 
         Returns:
-            float: Le montant total à payer.
+            float: The total amount to pay.
         """
         base_cost = self.vehicle.calculate_cost(self.duration_days)
         discount = base_cost * Rental.MEMBER_DISCOUNT_RATE if self.customer.is_member else 0
@@ -46,30 +46,28 @@ class Rental:
 
     def __str__(self) -> str:
         """
-        Retourne un récapitulatif lisible de la location (magic method - Part 3).
+        Returns a readable summary of the rental.
         """
         base_cost = self.vehicle.calculate_cost(self.duration_days)
         discount = base_cost * Rental.MEMBER_DISCOUNT_RATE if self.customer.is_member else 0
         total = base_cost - discount
 
-        member_status = "Oui (remise 10% appliquée)" if self.customer.is_member else "Non"
-
-        # Détection du type de véhicule pour affichage enrichi
-        vehicle_type = type(self.vehicle).__name__  # "Vehicle", "Car" ou "LuxuryCar"
+        member_status = "Yes (10% discount applied)" if self.customer.is_member else "No"
+        vehicle_type = type(self.vehicle).__name__
 
         return (
-            f"========== RÉCAPITULATIF DE LOCATION ==========\n"
-            f"  Client        : {self.customer.name}\n"
-            f"  Âge           : {self.customer.age} ans\n"
-            f"  Permis        : {'Oui' if self.customer.permis else 'Non'}\n"
-            f"  Membre        : {member_status}\n"
-            f"  Véhicule      : {self.vehicle.make} {self.vehicle.model} ({self.vehicle.year})\n"
+            f"========== RENTAL SUMMARY ==========\n"
+            f"  Customer      : {self.customer.name}\n"
+            f"  Age           : {self.customer.age}\n"
+            f"  License       : {'Yes' if self.customer.permis else 'No'}\n"
+            f"  Member        : {member_status}\n"
+            f"  Vehicle       : {self.vehicle.make} {self.vehicle.model} ({self.vehicle.year})\n"
             f"  Type          : {vehicle_type}\n"
-            f"  Disponible    : {'Oui' if self.vehicle.available else 'Non'}\n"
-            f"  Durée         : {self.duration_days} jour(s)\n"
-            f"  Tarif/jour    : {self.vehicle.daily_rate:.2f} €\n"
-            f"  Coût de base  : {base_cost:.2f} €\n"
-            f"  Remise        : -{discount:.2f} €\n"
-            f"  TOTAL À PAYER : {total:.2f} €\n"
-            f"================================================"
+            f"  Available     : {'Yes' if self.vehicle.available else 'No'}\n"
+            f"  Duration      : {self.duration_days} day(s)\n"
+            f"  Daily rate    : ${self.vehicle.daily_rate:.2f}\n"
+            f"  Base cost     : ${base_cost:.2f}\n"
+            f"  Discount      : -${discount:.2f}\n"
+            f"  TOTAL         : ${total:.2f}\n"
+            f"====================================="
         )
