@@ -1,25 +1,24 @@
 # Girls_team
 python_projet
-# 🚗 AutoRent — Système de Location de Voitures
+# 🚗 AutoRent — Car Rental System
 
 Projet Group Assignment 1 — PRG1406 Advanced Programming  
 Burkina Institute of Technology | Mai 2026
 
 ## Description
-Application console Python qui simule une agence de location de voitures.
-L'utilisateur saisit ses informations, choisit un véhicule, et obtient
-un récapitulatif complet de sa réservation.
-
+A Python console application that simulates a car rental agency.
+The user enters their details, selects a vehicle, and receives a complete
+summary of their booking.
 ## Classes
 | Classe | Fichier | Rôle |
 |---|---|---|
-| `Vehicle` | vehicle.py | Classe parente — attributs communs |
-| `Car` | vehicle.py | Enfant de Vehicle — voiture standard |
-| `LuxuryCar` | vehicle.py | Enfant de Car — véhicule premium |
-| `Customer` | customer.py | Données du client |
-| `Rental` | rental.py | Réservation (client + véhicule + durée) |
+| `Vehicle` | vehicle.py | Parent class — common attributes |
+| `Car` | vehicle.py | Child of Vehicle — standard car |
+| `LuxuryCar` | vehicle.py | Child of Car — premium vehicle|
+| `Customer` | customer.py | Customer data |
+| `Rental` | rental.py | Booking (customer + vehicle + duration) |
 
-## Comment lancer le programme
+## How to Run the Program
 ```bash
 python main.py
 ```
