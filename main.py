@@ -1,66 +1,102 @@
 # main.py
-# Membre 5 — Tests d'intégration complets
-# Vérifie que tous les fichiers s'importent et fonctionnent ensemble
+# Member 2 — Main Program
+# Project : Car Rental — PRG1406
 
+from vehicle import Vehicle
 from customer import Customer
-from vehicle import Vehicle, Car, LuxuryCar
-from rental import Rental
 
+print("=" * 45)
+print("      CAR RENTAL AGENCY")
+print("=" * 45)
 
-def main():
-    print("=== Système de Location de Véhicules ===\n")
+# ── Vehicle information input ──────────────
+print("\n--- Vehicle Registration ---")
 
-    # --- Validation d'année (staticmethod M4) ---
-    print("-- Test validate_year() --")
-    print(f"  2020 valide ? {Vehicle.validate_year(2020)}")
-    print(f"  1800 valide ? {Vehicle.validate_year(1800)}\n")
+make = input("Vehicle make: ")           # str
+model = input("Vehicle model: ")         # str
 
-    # --- Test 1 : Client membre + voiture standard ---
-    client_membre = Customer(name="Alice Dupont", age=30, permis=True, is_member=True)
-    voiture = Car(make="Toyota", model="Corolla", year=2020,
-                  daily_rate=50.0, available=True,
-                  num_doors=4, car_type="Berline")
-    location1 = Rental(customer=client_membre, vehicle=voiture, duration_days=5)
+while True:
+    try:
+        year = int(input("Year of manufacture: "))  # int
+        if year < 1900 or year > 2026:
+            print("Invalid year. Please try again.")
+            continue
+        break
+    except ValueError:
+        print("Please enter a valid integer.")
 
-    print(location1)
-    print(f"  → total_cost() : {location1.total_cost():.2f} €\n")
+while True:
+    try:
+        daily_rate = float(input("Daily rate (FCFA): "))  # float
+        if daily_rate <= 0:
+            print("The rate must be positive.")
+            continue
+        break
+    except ValueError:
+        print("Please enter a valid number.")
 
-    # --- Test 2 : Client non-membre + voiture de luxe ---
-    client_normal = Customer(name="Bob Martin", age=45, permis=True, is_member=False)
-    luxe = LuxuryCar(make="BMW", model="Série 7", year=2023,
-                     daily_rate=200.0, available=True,
-                     num_doors=4, car_type="Berline",
-                     premium_features="Cuir, Toit panoramique",
-                     chauffeur_available=True)
-    location2 = Rental(customer=client_normal, vehicle=luxe, duration_days=3)
+available = input("Is the vehicle available? (yes/no): ").lower() == "yes"  # bool
 
-    print(location2)
-    print(f"  → total_cost() : {location2.total_cost():.2f} €\n")
+vehicle = Vehicle(make, model, year, daily_rate, available)
 
-    # --- Test 3 : __eq__ sur Car (M4) ---
-    print("-- Test __eq__ entre deux Car --")
-    car_a = Car(make="Renault", model="Clio", year=2021,
-                daily_rate=35.0, available=True, num_doors=5, car_type="Citadine")
-    car_b = Car(make="Peugeot", model="208", year=2022,
-                daily_rate=35.0, available=True, num_doors=5, car_type="Citadine")
-    print(f"  car_a == car_b (même tarif 35€) ? {car_a == car_b}\n")
+# ── Customer information input ────────────────
+print("\n--- Customer Registration ---")
 
-    # --- Test 4 : apply_discount (M3) ---
-    print("-- Test apply_discount(20%) sur Car --")
-    car_a.apply_discount(20)
-    print(f"  Nouveau tarif de car_a après remise 20% : {car_a.daily_rate:.2f} €\n")
+nom = input("Customer full name: ")         # str
 
-    # --- Test 5 : Client sans permis ---
-    print("-- Test client sans permis --")
-    sans_permis = Customer(name="Charlie Léon", age=17, permis=False, is_member=False)
-    print(f"  {sans_permis}\n")
+while True:
+    try:
+        age = int(input("Customer age: "))    # int
+        if age < 18:
+            print("Customer must be at least 18 years old.")
+            continue
+        break
+    except ValueError:
+        print("Please enter a valid integer.")
 
-    # --- Récapitulatif final f-string (M1 style) ---
-    print("========== BILAN DES LOCATIONS ==========")
-    for i, loc in enumerate([location1, location2], 1):
-        print(f"  Location {i} : {loc.customer.name} — {loc.total_cost():.2f} €")
-    print("=========================================")
+permis = input("Driver's license number: ")           # str
 
+is_member = input("Is the customer a loyalty member? (yes/no): ").lower() == "yes"  # bool
 
-if __name__ == "__main__":
-    main()
+customer = Customer(nom, age, permis, is_member)
+
+# ── Rental duration input ───────────
+while True:
+    try:
+        days = int(input("\nNumber of rental days: "))  # int
+        if days <= 0:
+            print("Number of days must be positive.")
+            continue
+        break
+    except ValueError:
+        print("Please enter a valid integer.")
+
+# ── Arithmetic expressions ─────────────────────
+base_cost = vehicle.calculate_cost(days)                     # rate × days
+discount = base_cost * 0.15 if customer.is_member else 0.0  # 15% discount for members
+final_cost = base_cost - discount                            # final cost
+
+# ── Summary screen with f-strings ────────────
+print("\n" + "=" * 45)
+print("         RENTAL SUMMARY")
+print("=" * 45)
+
+print("\n>> Vehicle:")
+vehicle.display_info()
+
+print(f"\n>> Customer:")
+print(f"  Name          : {customer.nom}")
+print(f"  Age           : {customer.age} years old")
+print(f"  License No.   : {customer.permis}")
+print(f"  Member        : {customer.is_member}")
+
+print(f"\n>> Financial Details:")
+print(f"  Duration      : {days} day(s)")
+print(f"  Rate/day      : {vehicle.daily_rate} FCFA")
+print(f"  Base cost     : {base_cost} FCFA")
+print(f"  Discount      : -{discount} FCFA")
+print(f"  TOTAL TO PAY  : {final_cost} FCFA")
+
+print("\n" + "=" * 45)
+print("Thank you for your trust!")
+print("=" * 45)
