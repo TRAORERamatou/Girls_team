@@ -39,19 +39,19 @@ class Vehicle:
 
 
 class Car(Vehicle):
-    def _init_(self, make, model, year, daily_rate, doors, category):
+    def __init__(self, make, model, year, daily_rate, doors, category):
         super()._init_(make, model, year, daily_rate)
         self.doors = doors
         self.category = category
 
-    def _str_(self):
+    def __str__(self):
         return (
             f"{self.year} {self.make} {self.model} "
             f"({self.category}, {self.doors} doors) "
             f"- {self.daily_rate:,.0f} FCFA/day"
         )
 
-    def _repr_(self):
+    def __repr__(self):
         return (
             f"Car(make='{self.make}', model='{self.model}', year={self.year}, "
             f"daily_rate={self.daily_rate}, doors={self.doors}, "
@@ -66,7 +66,7 @@ class Car(Vehicle):
 
 
 class LuxuryCar(Car):
-    def _init_(
+    def __init__(
         self,
         make,
         model,
@@ -81,7 +81,7 @@ class LuxuryCar(Car):
         self.luxury_features = luxury_features
         self.chauffeur_available = chauffeur_available
 
-    def _str_(self):
+    def __str__(self):
         chauffeur = "chauffeur available" if self.chauffeur_available else "no chauffeur"
         return (
             f"{self.year} {self.make} {self.model} "
@@ -89,7 +89,7 @@ class LuxuryCar(Car):
             f"- {self.daily_rate:,.0f} FCFA/day"
         )
 
-    def _repr_(self):
+    def __repr__(self):
         return (
             f"LuxuryCar(make='{self.make}', model='{self.model}', "
             f"year={self.year}, daily_rate={self.daily_rate}, "
