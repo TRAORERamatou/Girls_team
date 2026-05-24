@@ -18,6 +18,11 @@ class Car(Vehicle):
         self.num_doors = num_doors
         self.car_type = car_type
 
+    def apply_discount(self, percent):
+        """Applies a discount to the daily rate."""
+        if 0 < percent < 100:
+            self.daily_rate -= self.daily_rate * (percent / 100)
+
     def __str__(self):
         return f"{super().__str__()} ({self.car_type}, {self.num_doors} doors)"
 
@@ -28,6 +33,13 @@ class LuxuryCar(Car):
         self.premium_features = premium_features
         self.chauffeur_available = chauffeur_available
 
+    def add_premium_service(self, service):
+        """Adds a new premium service to the car."""
+        if self.premium_features:
+            self.premium_features += f", {service}"
+        else:
+            self.premium_features = service
+
     def __str__(self):
-        chauffeur = "with chauffeur" if self.chauffeur_available else "no chauffeur"
+        chauffeur = "Chauffeur available" if self.chauffeur_available else "No chauffeur"
         return f"{super().__str__()} [Luxury: {self.premium_features}, {chauffeur}]"
