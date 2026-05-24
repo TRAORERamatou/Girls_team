@@ -1,12 +1,20 @@
 # ============================================================
 #  AutoRent — Car Rental Management System
+<<<<<<< HEAD
 #  PRG1406 | Group Assignment 1
 #  vehicle.py
+=======
+#  Member 4: Magic Methods and Decorators
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
 # ============================================================
 
 
 class Vehicle:
+<<<<<<< HEAD
     def __init__(self, make, model, year, daily_rate):
+=======
+    def _init_(self, make, model, year, daily_rate):
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
         if not Vehicle.validate_year(year):
             raise ValueError("Invalid vehicle year.")
 
@@ -16,10 +24,20 @@ class Vehicle:
         self.daily_rate = float(daily_rate)
         self.available = True
 
+<<<<<<< HEAD
     def __str__(self):
         return f"{self.year} {self.make} {self.model} - {self.daily_rate:,.0f} FCFA/day"
 
     def __repr__(self):
+=======
+    def _str_(self):
+        return (
+            f"{self.year} {self.make} {self.model} "
+            f"- {self.daily_rate:,.0f} FCFA/day"
+        )
+
+    def _repr_(self):
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
         return (
             f"Vehicle(make='{self.make}', model='{self.model}', "
             f"year={self.year}, daily_rate={self.daily_rate})"
@@ -37,6 +55,7 @@ class Vehicle:
 
 
 class Car(Vehicle):
+<<<<<<< HEAD
     def __init__(self, make, model, year, daily_rate, num_doors, car_type):
         super().__init__(make, model, year, daily_rate)
         self.num_doors = int(num_doors)
@@ -49,15 +68,36 @@ class Car(Vehicle):
 
     def __str__(self):
         return f"{super().__str__()} ({self.car_type}, {self.num_doors} doors)"
+=======
+    def __init__(self, make, model, year, daily_rate, doors, category):
+        super()._init_(make, model, year, daily_rate)
+        self.doors = doors
+        self.category = category
+
+    def __str__(self):
+        return (
+            f"{self.year} {self.make} {self.model} "
+            f"({self.category}, {self.doors} doors) "
+            f"- {self.daily_rate:,.0f} FCFA/day"
+        )
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
 
     def __repr__(self):
         return (
             f"Car(make='{self.make}', model='{self.model}', year={self.year}, "
+<<<<<<< HEAD
             f"daily_rate={self.daily_rate}, num_doors={self.num_doors}, "
             f"car_type='{self.car_type}')"
         )
 
     def __eq__(self, other):
+=======
+            f"daily_rate={self.daily_rate}, doors={self.doors}, "
+            f"category='{self.category}')"
+        )
+
+    def _eq_(self, other):
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
         if not isinstance(other, Car):
             return False
 
@@ -71,6 +111,7 @@ class LuxuryCar(Car):
         model,
         year,
         daily_rate,
+<<<<<<< HEAD
         num_doors,
         car_type,
         premium_features,
@@ -90,12 +131,35 @@ class LuxuryCar(Car):
     def __str__(self):
         chauffeur = "Chauffeur available" if self.chauffeur_available else "No chauffeur"
         return f"{super().__str__()} [Luxury: {self.premium_features}, {chauffeur}]"
+=======
+        doors,
+        category,
+        luxury_features,
+        chauffeur_available
+    ):
+        super()._init_(make, model, year, daily_rate, doors, category)
+        self.luxury_features = luxury_features
+        self.chauffeur_available = chauffeur_available
+
+    def __str__(self):
+        chauffeur = "chauffeur available" if self.chauffeur_available else "no chauffeur"
+        return (
+            f"{self.year} {self.make} {self.model} "
+            f"({self.category}, {self.doors} doors, {chauffeur}) "
+            f"- {self.daily_rate:,.0f} FCFA/day"
+        )
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
 
     def __repr__(self):
         return (
             f"LuxuryCar(make='{self.make}', model='{self.model}', "
             f"year={self.year}, daily_rate={self.daily_rate}, "
+<<<<<<< HEAD
             f"num_doors={self.num_doors}, car_type='{self.car_type}', "
             f"premium_features='{self.premium_features}', "
+=======
+            f"doors={self.doors}, category='{self.category}', "
+            f"luxury_features='{self.luxury_features}', "
+>>>>>>> e1b3eb8ff26002a54e0b8c6c8237d07e4f4aa309
             f"chauffeur_available={self.chauffeur_available})"
         )
