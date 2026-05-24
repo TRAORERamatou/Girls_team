@@ -5,7 +5,7 @@
 
 
 class Vehicle:
-    def _init_(self, make, model, year, daily_rate):
+    def __init__(self, make, model, year, daily_rate):
         if not Vehicle.validate_year(year):
             raise ValueError("Invalid vehicle year.")
 
@@ -15,13 +15,13 @@ class Vehicle:
         self.daily_rate = float(daily_rate)
         self.available = True
 
-    def _str_(self):
+    def __str__(self):
         return (
             f"{self.year} {self.make} {self.model} "
             f"- {self.daily_rate:,.0f} FCFA/day"
         )
 
-    def _repr_(self):
+    def __repr__(self):
         return (
             f"Vehicle(make='{self.make}', model='{self.model}', "
             f"year={self.year}, daily_rate={self.daily_rate})"
@@ -29,8 +29,6 @@ class Vehicle:
 
     @staticmethod
     def validate_year(year):
-        # Static method is used because year validation does not need
-        # access to a specific Vehicle object or to the Vehicle class itself.
         try:
             year = int(year)
             return 1900 <= year <= 2026
@@ -40,7 +38,7 @@ class Vehicle:
 
 class Car(Vehicle):
     def __init__(self, make, model, year, daily_rate, doors, category):
-        super()._init_(make, model, year, daily_rate)
+        super().__init__(make, model, year, daily_rate)
         self.doors = doors
         self.category = category
 
@@ -58,10 +56,9 @@ class Car(Vehicle):
             f"category='{self.category}')"
         )
 
-    def _eq_(self, other):
+    def __eq__(self, other):
         if not isinstance(other, Car):
             return False
-
         return self.daily_rate == other.daily_rate
 
 
@@ -77,7 +74,7 @@ class LuxuryCar(Car):
         luxury_features,
         chauffeur_available
     ):
-        super()._init_(make, model, year, daily_rate, doors, category)
+        super().__init__(make, model, year, daily_rate, doors, category)
         self.luxury_features = luxury_features
         self.chauffeur_available = chauffeur_available
 
