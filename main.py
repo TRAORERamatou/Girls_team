@@ -9,7 +9,7 @@ from customer import Customer
 from rental import Rental
 
 
-# ── Validated Input Functionsr ─────────────────────────────────
+# ── Validated Input Functions ─────────────────────────────────
 
 def get_text_input(message):
     """Prompts for a non-empty string."""
