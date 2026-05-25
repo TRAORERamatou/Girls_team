@@ -148,15 +148,17 @@ def make_booking(catalog):
     # 12. Driver Option (bool)
     driver = get_bool_input("  Add a driver? (yes/no): ")
 
-    base_cost = selected_car.daily_rate * days
-    discount = base_cost * 0.10 if is_member else 0.0
+    booking = Rental(customer, selected_car, days)
+
+    base_cost = selected_car.calculate_cost(days)
+    rental_cost = booking.total_cost()
+    discount = base_cost - rental_cost
     insurance_cost = 2500.0 * days if insurance else 0.0
     driver_cost = 10000.0 * days if driver else 0.0
-    total_cost = base_cost - discount + insurance_cost + driver_cost
+    total_cost = rental_cost + insurance_cost + driver_cost
 
-    booking = Rental(customer, selected_car, days)
     selected_car.available = False
-
+    
     print("\n" + "=" * 50)
     print("           BOOKING SUMMARY")
     print("=" * 50)
