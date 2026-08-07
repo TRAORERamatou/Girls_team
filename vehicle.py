@@ -40,8 +40,6 @@ class Vehicle:
 
     @staticmethod
     def validate_year(year):
-        # Static method is used because year validation does not need
-        # access to a specific Vehicle object or to the Vehicle class itself.
         try:
             year = int(year)
             return 1900 <= year <= 2026
@@ -73,7 +71,6 @@ class Car(Vehicle):
     def __eq__(self, other):
         if not isinstance(other, Car):
             return False
-
         return self.daily_rate == other.daily_rate
 
 
