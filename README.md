@@ -24,11 +24,11 @@ python main.py
 ```
 
 ## Membres du groupe
-- Membre 1 — main.py
-- Membre 2 — vehicle.py, customer.py
-- Membre 3 — héritage Car, LuxuryCar
-- Membre 4 — magic methods, décorateurs
-- Membre 5 — rental.py, intégration
+- Traore Ramatou — main.py
+- Ouedraogo Aminata— vehicle.py, customer.py
+-Kabore Oceanne — héritage Car, LuxuryCar
+- Roamba Sarifatou— magic methods, décorateurs
+- Yougbare Eunice — rental.py, intégration
 
 Requirements
 Python 3.10 or newer
